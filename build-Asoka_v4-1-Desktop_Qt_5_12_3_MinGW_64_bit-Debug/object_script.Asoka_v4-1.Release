@@ -1,0 +1,11 @@
+release/assistent.o
+release/system.o
+release/engine.o
+release/shell.o
+release/sqlite3.o
+release/sqlite.o
+release/main.o
+release/moc_console_interface.o
+release/moc_console_logic.o
+release/moc_aconsole.o
+release/moc_awidget.o

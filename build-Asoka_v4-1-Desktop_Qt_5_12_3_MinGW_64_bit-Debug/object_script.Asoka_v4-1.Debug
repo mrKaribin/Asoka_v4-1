@@ -1,0 +1,11 @@
+debug/assistent.o
+debug/system.o
+debug/engine.o
+debug/shell.o
+debug/sqlite3.o
+debug/sqlite.o
+debug/main.o
+debug/moc_console_interface.o
+debug/moc_console_logic.o
+debug/moc_aconsole.o
+debug/moc_awidget.o
