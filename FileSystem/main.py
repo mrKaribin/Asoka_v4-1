@@ -1,16 +1,37 @@
-# This is a sample Python script.
+import tkinter
+import sys
+import argparse
+from Service import Global
+from Widgets.MainWindow import MainWindow
+from Types.File import File
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+sys.path.insert(0, Global.PyAsoka_Path)
+import asoka
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+def print_hi():
+    print(f'Привет, {asoka.get("user_name")}, я - {asoka.get("program_name")}!')
 
 
-# Press the green button in the gutter to run the script.
+def createArgParser():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-u', '--uitype', default = Global.UIType.linear)
+    return parser
+
+
 if __name__ == '__main__':
-    print_hi('PyCharm')
+    parser = createArgParser()
+    args = parser.parse_args(sys.argv[1:])
+    Global.currentUIType = args.uitype
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    root = tkinter.Tk()
+    screen_w = root.winfo_screenwidth()
+    screen_h = root.winfo_screenheight()
+    if Global.currentUIType == Global.UIType.linear:
+        width = int(screen_w * 0.21)
+        heigth = int(screen_h * 0.5)
+        # print(f'{width}:{heigth}')
+
+    file = File()
+
+    MainWindow(400, 540).run()

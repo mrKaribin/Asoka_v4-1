@@ -1,0 +1,108 @@
+<HeadLabel@Label>:
+    color: 0, 0, 0, 1
+    font_size: 16
+    size_hint: 1, None
+    height: 30
+
+<AddBlockButton@Button>:
+    size_hint: None, None
+    size: 40, 40
+    background_color: 0, 0, 0, 0
+
+<AddBlockIcon@Image>:
+    size: ((self.parent.width), (self.parent.height))
+    center_x: (self.parent.center_x + (self.width / 100))
+    center_y: (self.parent.center_y + (self.height / 100))
+
+<TextBlock>:
+    padding: 5
+    size_hint: 1, None
+    height: self.minimum_height
+    TextInput:
+        id: input
+        size_hint: 1, None
+        # height: self.texture_size[1] + 10
+        font_size: 18
+
+<AddScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        spacing: 5
+        padding: 5
+        HeadLabel:
+            text: 'Заголовок'
+        TextInput:
+            id: header_input
+            font_size: 18
+            size_hint: 1, None
+            height: 30
+        HeadLabel:
+            text: 'Теги'
+        BoxLayout:
+            orientation: 'horizontal'
+            size_hint: 1, None
+            height: 30
+            spacing: 5
+            padding: 5
+            Button:
+                size_hint: None, None
+                size: 20, 20
+                background_color: 0, 0, 0, 0
+                on_press: root.add_tag_clicked()
+                AddBlockIcon:
+                    source: 'icons/dark_add.png'
+            BoxLayout:
+                id: tags_layout
+                orientation: 'horizontal'
+                spacing: 5
+        HeadLabel:
+            text: 'Содержимое'
+        AnchorLayout:
+            anchor_x: 'center'
+            anchor_y: 'center'
+            size_hint: 1, None
+            height: 40
+            BoxLayout:
+                orientation: 'horizontal'
+                size_hint: None, 1
+                width: self.minimum_width
+                spacing: 5
+                haligh: 'center'
+                AddBlockButton:
+                    on_press: root.add_image_clicked()
+                    AddBlockIcon:
+                        source: 'icons/dark_image.png'
+                AddBlockButton:
+                    on_press: root.add_video_clicked()
+                    AddBlockIcon:
+                        source: 'icons/dark_video.png'
+                AddBlockButton:
+                    on_press: root.add_audio_clicked()
+                    AddBlockIcon:
+                        source: 'icons/dark_music.png'
+                AddBlockButton:
+                    on_press: root.add_text_clicked()
+                    AddBlockIcon:
+                        source: 'icons/dark_text.png'
+        ScrollView:
+            BoxLayout:
+                id: blocks_layout
+                orientation: 'vertical'
+                size_hint: 1, None
+                height: self.minimum_height
+        BoxLayout:
+            orientation: 'horizontal'
+            size_hint: 1, None
+            height: 35
+            spacing: 5
+            Button:
+                text: 'Отмена'
+                font_size: 16
+                background_color: (1, 0, 0, 1)
+                on_press: root.back_clicked()
+            Button:
+                text: 'Сохранить'
+                font_size: 16
+                background_color: (0, 1, 0, 1)
+                on_press: root.save_clicked()
+
