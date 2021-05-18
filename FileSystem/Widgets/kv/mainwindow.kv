@@ -1,0 +1,51 @@
+<MenuButton@Button>:
+    size: (200, (self.parent.size[0] / 3))
+    size_hint: (.5, None)
+
+<MenuButtonImage@Image>:
+    size: ((self.parent.size[0] / 2), (self.parent.size[1] / 2))
+    center_x: (self.parent.center_x + (self.width / 100))
+    center_y: (self.parent.center_y + (self.height / 100))
+
+<MainScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        ScrollView:
+            size_hint: (1, 1)
+            GridLayout:
+                cols: 2
+                size_hint: (1, None)
+                height: self.minimum_height
+                MenuButton:
+                    on_press: root.search_clicked()
+                    MenuButtonImage:
+                        source: 'icons/search.png'
+                MenuButton:
+                    on_press: root.add_clicked()
+                    MenuButtonImage:
+                        source: 'icons/add.png'
+                MenuButton:
+                    on_press: root.image_clicked()
+                    MenuButtonImage:
+                        source: 'icons/image.png'
+                MenuButton:
+                    on_press: root.video_clicked()
+                    MenuButtonImage:
+                        source: 'icons/video.png'
+                MenuButton:
+                    on_press: root.music_clicked()
+                    MenuButtonImage:
+                        source: 'icons/music.png'
+                MenuButton:
+                    on_press: root.page_clicked()
+                    MenuButtonImage:
+                        source: 'icons/page.png'
+                MenuButton:
+                    on_press: root.statistic_clicked()
+                    MenuButtonImage:
+                        source: 'icons/statistic.png'
+                MenuButton:
+                    on_press: root.random_clicked()
+                    MenuButtonImage:
+                        source: 'icons/random.png'
+
