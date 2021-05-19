@@ -2,12 +2,24 @@ import kivy
 import random
 from Service.Global import *
 from Types.File import File
-from Widgets.SearchScreen import FileTag
 
 kivy.require(current_kivy_version)
 from kivy.uix.screenmanager import ScreenManager, Screen
+from kivy.properties import StringProperty, NumericProperty
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.label import Label
+
+
+class TagLabel(Label):
+
+    def __init__(self, name, **kwargs):
+        super().__init__(**kwargs)
+        self.name = name
+
+    name = StringProperty('')
+    win_width = NumericProperty(0)
+    win_height = NumericProperty(0)
 
 
 class InputBlock(BoxLayout):
@@ -37,7 +49,7 @@ class AddScreen(Screen):
 
     def add_tag_clicked(self):
         layout = self.ids.tags_layout
-        layout.add_widget(FileTag('tag'))
+        layout.add_widget(TagLabel('tag'))
 
     def add_image_clicked(self):
         print('Image added')

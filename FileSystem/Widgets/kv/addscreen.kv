@@ -1,18 +1,33 @@
 <HeadLabel@Label>:
+    but_size:
     color: 0, 0, 0, 1
-    font_size: 16
+    font_size: self.height * 0.8
     size_hint: 1, None
-    height: 30
+    height: (min(root.parent.width, root.parent.height) * 0.06) if root.parent is not None else 0
 
 <AddBlockButton@Button>:
+    but_size: (min(root.parent.parent.parent.parent.width, root.parent.parent.parent.parent.height) * 0.08) if root.parent is not None else 0
     size_hint: None, None
-    size: 40, 40
+    size: self.but_size, self.but_size
     background_color: 0, 0, 0, 0
 
 <AddBlockIcon@Image>:
     size: ((self.parent.width), (self.parent.height))
     center_x: (self.parent.center_x + (self.width / 100))
     center_y: (self.parent.center_y + (self.height / 100))
+
+<TagLabel>:
+    size_hint: (None, None)
+    height: root.parent.height if root.parent is not None else 0
+    width: self.texture_size[0] + 10
+    font_size: root.height * 0.7
+    text: root.name
+    canvas.before:
+        Color:
+            rgba: (0.5, 0.5, 0.5, 1)
+        RoundedRectangle:
+            pos: self.pos
+            size: self.size
 
 <TextBlock>:
     padding: 5
@@ -27,26 +42,27 @@
 <AddScreen>:
     BoxLayout:
         orientation: 'vertical'
-        spacing: 5
-        padding: 5
+        spacing: min(root.width, root.height) * 0.015
+        padding: min(root.width, root.height) * 0.015
         HeadLabel:
             text: 'Заголовок'
         TextInput:
             id: header_input
-            font_size: 18
+            font_size: self.height * 0.7
             size_hint: 1, None
-            height: 30
+            height: min(root.width, root.height) * 0.06
         HeadLabel:
             text: 'Теги'
         BoxLayout:
             orientation: 'horizontal'
             size_hint: 1, None
-            height: 30
-            spacing: 5
-            padding: 5
+            height: min(root.width, root.height) * 0.08
+            spacing: min(root.width, root.height) * 0.015
+            padding: min(root.width, root.height) * 0.015
             Button:
+                but_size: min(root.width, root.height) * 0.05
                 size_hint: None, None
-                size: 20, 20
+                size: self.but_size, self.but_size
                 background_color: 0, 0, 0, 0
                 on_press: root.add_tag_clicked()
                 AddBlockIcon:
@@ -54,19 +70,19 @@
             BoxLayout:
                 id: tags_layout
                 orientation: 'horizontal'
-                spacing: 5
+                spacing: min(root.width, root.height) * 0.02
         HeadLabel:
             text: 'Содержимое'
         AnchorLayout:
             anchor_x: 'center'
             anchor_y: 'center'
             size_hint: 1, None
-            height: 40
+            height: min(root.width, root.height) * 0.08
             BoxLayout:
                 orientation: 'horizontal'
                 size_hint: None, 1
                 width: self.minimum_width
-                spacing: 5
+                spacing: min(root.width, root.height) * 0.015
                 haligh: 'center'
                 AddBlockButton:
                     on_press: root.add_image_clicked()
@@ -93,16 +109,16 @@
         BoxLayout:
             orientation: 'horizontal'
             size_hint: 1, None
-            height: 35
-            spacing: 5
+            height: min(root.width, root.height) * 0.07
+            spacing: min(root.width, root.height) * 0.015
             Button:
                 text: 'Отмена'
-                font_size: 16
+                font_size: self.height * 0.7
                 background_color: (1, 0, 0, 1)
                 on_press: root.back_clicked()
             Button:
                 text: 'Сохранить'
-                font_size: 16
+                font_size: self.height * 0.7
                 background_color: (0, 1, 0, 1)
                 on_press: root.save_clicked()
 

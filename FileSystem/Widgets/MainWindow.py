@@ -54,7 +54,7 @@ class MainWindow(App):
         super().__init__(**kwargs)
 
         if Global.currentOs == 'win32':
-        	Window.size = (width, heigth)
+            Window.size = (400, 580)
         Window.clearcolor = (250, 238, 221, 225)
         self.title = 'Менеджер задач'
 
