@@ -1,8 +1,15 @@
-
+import sys
 
 PyAsoka_Path = '../PyAsoka'
 PyAsoka_Service_Path = '../PyAsoka/Service'
+
 currentUIType = 0
+currentOs = sys.platform
+current_kivy_version = '' 
+if currentOs == 'win32':
+	current_kivy_version = '2.0.0'
+elif currentOs == 'linux':
+	current_kivy_version ='1.11.1'
 
 
 class UIType:

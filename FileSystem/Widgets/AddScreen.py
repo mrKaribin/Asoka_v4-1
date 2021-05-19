@@ -4,7 +4,7 @@ from Service.Global import *
 from Types.File import File
 from Widgets.SearchScreen import FileTag
 
-kivy.require('2.0.0')
+kivy.require(current_kivy_version)
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.boxlayout import BoxLayout

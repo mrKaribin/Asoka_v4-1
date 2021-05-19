@@ -3,7 +3,7 @@ import random
 from Service.Global import *
 from Types.File import File
 
-kivy.require('2.0.0')
+kivy.require(current_kivy_version)
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.boxlayout import BoxLayout
@@ -11,6 +11,7 @@ from kivy.uix.button import Button
 from kivy.uix.label import Label
 from kivy.uix.image import Image
 from kivy.properties import StringProperty
+from kivy.properties import NumericProperty
 
 
 class FilterClosed(BoxLayout):
@@ -32,6 +33,8 @@ class FileTag(Label):
         self.name = name
 
     name = StringProperty('')
+    win_width = NumericProperty(0)
+    win_height = NumericProperty(0)
 
 
 class FilePreview(BoxLayout):
@@ -47,6 +50,8 @@ class FilePreview(BoxLayout):
 
     header = StringProperty('')
     source = StringProperty('')
+    win_width = NumericProperty(0)
+    win_height = NumericProperty(0)
 
 
 class SearchScreen(Screen):
@@ -54,16 +59,23 @@ class SearchScreen(Screen):
     def __init__(self, **kw):
         super().__init__(**kw)
         self.filter_is_open = False
+        self.ttt = False
 
     def search_clicked(self):
+        print('start')
         text = self.ids.search_input.text
         layout = self.ids.result_layout
         layout.clear_widgets()
+        if self.ttt:
+        	self.ttt = False
+        	# return
         for i in range(25):
             file = File()
             file.setHeader("Уникальный заголовок")
             file.setType(random.randint(1, 5))
             layout.add_widget(FilePreview(file))
+        print('finish')
+        self.ttt = True
 
     def filter_clicked(self):
         lay = self.ids.filter_layout

@@ -1,19 +1,20 @@
 <FilterClosed>:
     size_hint: 1, None
-    height: 30
+    height: (min(root.parent.parent.parent.width, root.parent.parent.parent.height) * 0.07) if root.parent is not None else 0 
     Button:
         text: 'Открыть фильтры'
-        font_size: 12
+        font_size: self.height * 0.7
         on_press: root.parent.parent.parent.filter_clicked()
 
 <FilterOpened>:
+    orientation: 'vertical'
     size_hint: 1, None
-    height: 120
+    # height: root.mininum_height
     Button:
         text: 'Закрыть фильтры'
-        font_size: 12
+        font_size: self.height * 0.7
         size_hint: 1, None
-        height: 30
+        height: (min(root.parent.parent.parent.width, root.parent.parent.parent.height) * 0.07) if root.parent is not None else 0 
         on_press: root.parent.parent.parent.filter_clicked()
 
 <PreviewIcon@Image>:
@@ -22,9 +23,12 @@
     center_y: (self.parent.center_y + (self.height / 100))
 
 <FileTag>:
+    win_width: root.parent.parent.parent.parent.win_width if root.parent is not None else 1
+    win_height: root.parent.parent.parent.parent.win_height if root.parent is not None else 1
     size_hint: (None, None)
-    height: 20
-    width: self.texture_size[0] + 15
+    height: min(root.win_width, root.win_height) * 0.05
+    width: self.texture_size[0] + 10
+    font_size: root.height * 0.8
     text: root.name
     canvas.before:
         Color:
@@ -34,10 +38,12 @@
             size: self.size
 
 <FilePreview>:
+    win_width: root.parent.parent.parent.parent.width if root.parent is not None else 1
+    win_height: root.parent.parent.parent.parent.height if root.parent is not None else 1
     orientation: 'horizontal'
     size_hint: 1, None
-    height: 50
-    spacing: 10
+    height: min(root.win_width, root.win_height) * 0.1
+    spacing: min(root.win_width, root.win_height) * 0.03
     Label:
         size_hint: (None, None)
         size: (self.parent.height, self.parent.height)
@@ -54,7 +60,7 @@
         orientation: 'vertical'
         Label:
             text: root.header
-            font_size: 16
+            font_size: self.height * 0.8
             color: 0, 0, 0, 1
             text_size: self.size
             halign: 'left'
@@ -63,7 +69,7 @@
             BoxLayout:
                 id: tags_layout
                 orientation: 'horizontal'
-                spacing: 5
+                spacing: min(root.win_width, root.win_height) * 0.02
                 size_hint: (None, 1)
                 width: self.minimum_width
 
@@ -71,17 +77,17 @@
 <SearchScreen>:
     BoxLayout:
         orientation: 'vertical'
-        padding: 5
-        spacing: 5
+        padding: min(root.width, root.height) * 0.02
+        spacing: min(root.width, root.height) * 0.02
         BoxLayout:
             orientation: 'horizontal'
             size_hint: 1, None
-            spacing: 5
-            height: 40
+            height: min(root.width, root.height) * 0.08
+            spacing: min(root.width, root.height) * 0.02
             TextInput:
                 id: search_input
                 multiline: False
-                font_size: 22
+                font_size: self.height * 0.7
             Button:
                 size_hint: None, None
                 size: self.parent.height, self.parent.height
@@ -100,12 +106,12 @@
                 orientation: 'vertical'
                 size_hint: (1, None)
                 height: self.minimum_height
-                spacing: 5
-                padding: 5
+                spacing: min(root.width, root.height) * 0.02
+                padding: min(root.width, root.height) * 0.02
         Button:
             text: 'Назад'
-            font_size: 12
+            font_size: self.height * 0.7
             size_hint: 1, None
-            height: 30
+            height: min(root.width, root.height) * 0.07
             on_press: root.back_clicked()
 

@@ -1,8 +1,9 @@
 import kivy
+from Service import Global
 from Widgets.SearchScreen import SearchScreen
 from Widgets.AddScreen import AddScreen
 
-kivy.require('2.0.0')
+kivy.require(Global.current_kivy_version)
 from kivy.app import App
 from kivy.lang import Builder
 from kivy.core.window import Window
@@ -49,11 +50,11 @@ class MainScreen(Screen):
 
 class MainWindow(App):
 
-    def __init__(self, width, heigth, **kwargs):
+    def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.width, self.heigth = width, heigth
 
-        Window.size = (width, heigth)
+        if Global.currentOs == 'win32':
+        	Window.size = (width, heigth)
         Window.clearcolor = (250, 238, 221, 225)
         self.title = 'Менеджер задач'
 
