@@ -67,8 +67,8 @@ class SearchScreen(Screen):
         layout = self.ids.result_layout
         layout.clear_widgets()
         if self.ttt:
-        	self.ttt = False
-        	# return
+            self.ttt = False
+            # return
         for i in range(25):
             file = File()
             file.setHeader("Уникальный заголовок")
