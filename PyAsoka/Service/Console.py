@@ -1,4 +1,5 @@
 import datetime
+import asoka as a
 
 
 def write(text):
@@ -12,7 +13,7 @@ def write(text):
 
 
 def getLogFile():
-    file = open('log.txt', 'a')
+    file = open(a.dir.log, 'a')
     file.write('\n')
     return file
 
@@ -38,6 +39,11 @@ def warning(text):
 def error(text):
     if level > 3: return
     write(f"ERROR !!! {text}")
+
+
+a.comment = comment
+a.warning = warning
+a.error = error
 
 
 mode = 1

@@ -1,9 +1,27 @@
 <HeadLabel@Label>:
-    but_size:
     color: 0, 0, 0, 1
     font_size: self.height * 0.8
     size_hint: 1, None
     height: (min(root.parent.width, root.parent.height) * 0.06) if root.parent is not None else 0
+
+<TagEditDialog>:
+    orientation: "vertical"
+    
+
+<LoadDialog>:
+    orientation: "vertical"
+    FileChooserListView:
+        id: filechooser
+    BoxLayout:
+        size_hint_y: None
+        height: root.height * 0.08
+        Button:
+            text: "Cancel"
+            on_release: root.cancel()
+
+        Button:
+            text: "Load"
+            on_release: root.load(filechooser.path, filechooser.selection)
 
 <AddBlockButton@Button>:
     but_size: (min(root.parent.parent.parent.parent.width, root.parent.parent.parent.parent.height) * 0.08) if root.parent is not None else 0
@@ -30,14 +48,28 @@
             size: self.size
 
 <TextBlock>:
-    padding: 5
-    size_hint: 1, None
+    padding: root.parent.parent.parent.padding if root.parent is not None else 0
+    size_hint: None, None
+    width: root.parent.parent.width if root.parent is not None else 0
     height: self.minimum_height
     TextInput:
         id: input
         size_hint: 1, None
         # height: self.texture_size[1] + 10
         font_size: 18
+        background_color: (1, 1, 1, 1)
+
+<ImageBlock>:
+    padding: root.parent.parent.parent.padding if root.parent is not None else 0
+    size_hint: None, None
+    width: root.parent.parent.width if root.parent is not None else 0
+    height: self.minimum_height
+    Image:
+        id: input
+        size_hint: None, None
+        coef: (root.width * 0.6 / self.texture_size[0]) if self.texture_size[0] != 0 else 0
+        width: root.width
+        height: self.texture_size[1] * self.coef
 
 <AddScreen>:
     BoxLayout:
@@ -49,6 +81,7 @@
         TextInput:
             id: header_input
             font_size: self.height * 0.7
+            multiline: False
             size_hint: 1, None
             height: min(root.width, root.height) * 0.06
         HeadLabel:

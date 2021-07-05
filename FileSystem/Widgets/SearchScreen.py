@@ -14,11 +14,7 @@ from kivy.properties import StringProperty
 from kivy.properties import NumericProperty
 
 
-class FilterClosed(BoxLayout):
-    pass
-
-
-class FilterOpened(BoxLayout):
+class Filter(BoxLayout):
     pass
 
 
@@ -79,13 +75,15 @@ class SearchScreen(Screen):
 
     def filter_clicked(self):
         lay = self.ids.filter_layout
-        lay.clear_widgets()
+        butt = self.ids.filter_button
         if self.filter_is_open:
-            lay.add_widget(FilterClosed())
+            lay.clear_widgets()
+            butt.text = 'Открыть фильтр'
             self.filter_is_open = False
         else:
-            lay.add_widget(FilterOpened())
+            lay.add_widget(Filter())
+            butt.text = 'Закрыть фильтр'
             self.filter_is_open = True
 
     def back_clicked(self):
-        self.manager.current = 'main'
+        self.manager.switch_to(self.parent.parent.main_screen)

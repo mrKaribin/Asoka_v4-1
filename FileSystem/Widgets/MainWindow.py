@@ -1,4 +1,5 @@
 import kivy
+
 from Service import Global
 from Widgets.SearchScreen import SearchScreen
 from Widgets.AddScreen import AddScreen
@@ -9,10 +10,6 @@ from kivy.lang import Builder
 from kivy.core.window import Window
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.uix.boxlayout import BoxLayout
-from kivy.uix.gridlayout import GridLayout
-from kivy.uix.textinput import TextInput
-from kivy.uix.image import Image
-from kivy.uix.button import Button
 
 
 from os import listdir
@@ -24,10 +21,10 @@ for kv in listdir(kv_path):
 class MainScreen(Screen):
 
     def search_clicked(self):
-        self.manager.current = 'search'
+        self.manager.switch_to(Context.search_screen)
 
     def add_clicked(self):
-        self.manager.current = 'add'
+        self.manager.switch_to(Context.add_screen)
 
     def image_clicked(self):
         print('Clicked button "Image"')
@@ -48,7 +45,7 @@ class MainScreen(Screen):
         print('Clicked button "Random"')
 
 
-class MainWindow(App):
+class Context(BoxLayout):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -58,12 +55,16 @@ class MainWindow(App):
         Window.clearcolor = (250, 238, 221, 225)
         self.title = 'Менеджер задач'
 
-        self.sm = ScreenManager()
-        self.sm.add_widget(MainScreen(name='main'))
-        self.sm.add_widget(SearchScreen(name='search'))
-        self.sm.add_widget(AddScreen(name='add'))
+        self.manager = ScreenManager()
+        self.manager.switch_to(self.main_screen)
+        self.add_widget(self.manager)
+
+    main_screen = MainScreen(name='main')
+    search_screen = SearchScreen(name='search')
+    add_screen = AddScreen(name='add')
+
+
+class MainWindow(App):
 
     def build(self):
-        return self.sm
-
-
+        return Context()
