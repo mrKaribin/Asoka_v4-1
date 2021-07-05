@@ -46,5 +46,5 @@ a.warning = warning
 a.error = error
 
 
-mode = 1
-level = 2
+mode = 2
+level = 1

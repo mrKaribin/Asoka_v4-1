@@ -213,12 +213,12 @@ class AsokaTypeOld:
         query = f"INSERT INTO {table} ({fields}) VALUES({args});"
 
         if db_type == 'sqlite':
-            Database.execute(query, save_row_id = True)
+            Database.execute(query, save_row_id=True)
             self.set('id', Database.lastRowId)
         elif db_type == 'mysql':
             data = Database.query(f"SELECT MAX('id') FROM {table};")
             try:
-                if db_type == 'sqlite':
+                if db_type == 'mysql':
                     print(data[0])
                     self.set('id', data[0]['id'])
             except Exception:

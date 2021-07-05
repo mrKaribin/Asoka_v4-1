@@ -40,7 +40,7 @@ class SqLite:
             return cursor.fetchall()
 
     @staticmethod
-    def execute(query: str, save_row_id = False):
+    def execute(query: str, save_row_id=False):
         cursor = SqLite.connect()
         try:
             with SqLite.connection:

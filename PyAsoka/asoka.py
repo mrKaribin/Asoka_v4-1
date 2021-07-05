@@ -22,8 +22,8 @@ class types:
 
     class db:
         class lang:
-            mysql = 1
-            sqlite = 2
+            mysql = 'MySql'
+            sqlite = 'SqLite'
 
 
 class dir:

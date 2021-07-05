@@ -5,12 +5,13 @@ from Service.AType import *
 Person = create_class('Person', (),
                       structure=(
                           Field('name', a.types.str, (True, True)),
+                          Field('gender', a.types.bool, (True, True)),
                           Field('age', a.types.int, (True, True)),
                           Field('rating', a.types.float, (True, True)),
                           Field('friends', a.types.list),
                           Field('loving', 'Person')
                       ),
-                      mode=Mode(DbProfile(name='tests.db', table='persons'))
+                      mode=Mode(DbProfile(a.types.db.lang.sqlite, 'tests.db', table='persons'))
                       )
 
 
@@ -18,6 +19,7 @@ if __name__ == '__main__':
     person = Person()
 
     person.setName('Вадим')
+    person.setGender(True)
     person.setAge(24)
     person.setRating(3.6)
     person.friends.append('Саня')
@@ -25,6 +27,8 @@ if __name__ == '__main__':
     person.friends.append('Женя')
 
     print(f'Name: {person.getName()}')
+    print(f'Gender: {person.getGender()}')
     print(f'Age: {person.getAge()}')
     print(f'Rating: {person.getRating()}')
     print(person.friends)
+    person.__insert__(('name', 'age', 'rating'))
