@@ -102,8 +102,10 @@ def from_sql(value, datatype):
 
 def generate_insert(db_mode):
     code = f"""
-def __insert__(self, keys):
+def insert(self, keys=None):
     from Service.Database.{db_mode.lang} import {db_mode.lang} as db
+    if keys is None:
+        keys = self.__fields__
     names = ''
     values = ''
 
@@ -119,7 +121,7 @@ def __insert__(self, keys):
     names = names[0:len(names) - 2]
     values = values[0:len(values) - 2]
 
-    query = 'INSERT INTO {db_mode.table} (%s) VALUES(%s);' % (names, values)
+    query = 'INSERT INTO {db_mode.table} (%s) VALUES (%s);' % (names, values)
     comment('New query: %s' % query)
     return
 """
@@ -127,7 +129,7 @@ def __insert__(self, keys):
         code += f"""
     data = db.execute(query, True)
 """
-    return {'__insert__': code}
+    return {'insert': code}
 
 
 def generate_update(lang=a.types.db.lang.sqlite):
@@ -152,7 +154,7 @@ def create_class(classname, parents=(), structure=(), mode: Mode = False):
     fields = []
     for fld in structure:
         name = f'__{fld.name}__'
-        fields.append(name)
+        fields.append(fld.name)
         struct[name] = fld
 
         get, set = fld.access

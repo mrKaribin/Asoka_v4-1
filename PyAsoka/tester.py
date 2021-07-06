@@ -1,4 +1,5 @@
 import asoka as a
+from Service.Console import *
 from Service.AType import *
 
 
@@ -26,9 +27,9 @@ if __name__ == '__main__':
     person.friends.append('Антон')
     person.friends.append('Женя')
 
-    print(f'Name: {person.getName()}')
-    print(f'Gender: {person.getGender()}')
-    print(f'Age: {person.getAge()}')
-    print(f'Rating: {person.getRating()}')
-    print(person.friends)
-    person.__insert__(('name', 'age', 'rating'))
+    comment(f'Name: {person.getName()}')
+    comment(f'Gender: {person.getGender()}')
+    comment(f'Age: {person.getAge()}')
+    comment(f'Rating: {person.getRating()}')
+    comment(person.friends)
+    person.insert()
